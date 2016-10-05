@@ -1,5 +1,6 @@
 import React from 'react';
 import {Col, Row} from 'react-materialize';
+import Laneheader from './Laneheader';
 
 var laneStyle = {
 	paddingTop:'1em',
@@ -13,22 +14,18 @@ var laneStyle = {
 };
 
 const Portfolio = () => (
-      <div className="row">
-        <div className="col s12 m4">
-            <div className="lane-header" style={laneStyle} >ideate
-              <a className="right black-text bold-text waves-effect waves-light">+</a>
-            </div>
-        </div>
-
-        <div className="col s12 m4">
-            <div class="lane-header" style={laneStyle}>refine</div>
-        </div>
-
-        <div className="col s12 m4">
-            <div className="lane-header" style={laneStyle}>act</div>
-        </div>
-        
-      </div>
+		<div className="row">
+			<div className="col s12 m4">
+				<Laneheader title="ideate" />
+			</div>
+			<div className="col s12 m4">
+				<Laneheader title="refine" />
+			</div>
+			<div className="col s12 m4">
+				<Laneheader title="act" />
+			</div>
+		</div>
+	
 );
 
 export default Portfolio;

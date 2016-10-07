@@ -1,10 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, hashHistory, Redirect } from 'react-router'
-import App from './App';
-import Portfolio from './Portfolio';
-import Agenda from './Agenda';
-import Archive from './Archive';
+import App from './components/App';
+import Portfolio from './components/Portfolio';
+import Agenda from './components/Agenda';
+import Archive from './components/Archive';
 
 
 render((

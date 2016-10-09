@@ -21,13 +21,18 @@ var laneStyle = {
 
 export default observer(React.createClass({
   getIdeasForLane(){
-    return ideaStore.ideas;
+    return ideaStore.ideas.filter(idea => {
+      console.log(idea);
+      console.log(idea.status.status === this.props.title);
+      return idea.status.status === this.props.title
+    });
   },
   submitIdea() {
     var title = ReactDOM.findDOMNode(this.refs.newtitle).value.trim();
     var description = ReactDOM.findDOMNode(this.refs.newdescription).value.trim();
     var customer = $('#newcustomer')[0].value;
-    ideaStore.addIdea(title, description, customer);
+    var status = 'ideate';
+    ideaStore.addIdea(title, description, customer,status);
     
   },
   render() {
@@ -86,6 +91,7 @@ export default observer(React.createClass({
   			   {lanebutton}
   		    </div>
           <div>
+
                   <ul className="idea-list">
         {this.getIdeasForLane().map(idea =>
           (<Idea

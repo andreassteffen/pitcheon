@@ -6,8 +6,8 @@ import autorun from 'mobx';
 
 class IdeaStore{
 	ideas = observable([]);
-	addIdea (title, description, customer) {
-		this.ideas.push(new IdeaModel(this, Utils.uuid(), title, description, customer));
+	addIdea (title, description, customer, status) {
+		this.ideas.push(new IdeaModel(this, Utils.uuid(), title, description, customer, status));
 	}
 }
 

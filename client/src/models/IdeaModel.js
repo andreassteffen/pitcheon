@@ -4,9 +4,9 @@ export default class IdeaModel {
 	constructor(store, id, title, description, customer) {
 		this.store = store;
 		this.id = id;
-		this.title = observable(title);
-		this.description = observable(description);
-		this.customer = observable(customer);
+		this.title = observable({title});
+		this.description = observable({description});
+		this.customer = observable({customer});
 	}
 
 	destroy() {

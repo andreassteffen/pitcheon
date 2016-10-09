@@ -13,7 +13,9 @@ var laneStyle = {
  	fontSize:'1.5em'
 };
 
-const Portfolio = () => (
+export default React.createClass({
+  render() {
+  	return(
 		<div className="row">
 			<div className="col s12 m4">
 				<Laneheader title="ideate" />
@@ -25,7 +27,6 @@ const Portfolio = () => (
 				<Laneheader title="act" />
 			</div>
 		</div>
-	
-);
-
-export default Portfolio;
+	)
+	}
+});

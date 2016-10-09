@@ -6,7 +6,6 @@ import Portfolio from './components/Portfolio';
 import Agenda from './components/Agenda';
 import Archive from './components/Archive';
 
-
 render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
@@ -14,6 +13,5 @@ render((
       <Route path="/agenda" component={Agenda}/>
       <Route path="/archive" component={Archive}/>
     </Route>
-
   </Router>
 ), document.getElementById('root'))

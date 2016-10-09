@@ -12,10 +12,11 @@ var navStyle = {
 	borderStyle:'solid'
 };
 
+
 const PitcheonNavbar = () => (
 	  <nav className="white"  style={navStyle}>
 	    <div className="nav-wrapper white container">
-	      <Link className="brand-logo  black-text left">pitcheon</Link>
+	      <Link className="brand-logo  black-text left">pitcheon </Link>
 	      <ul className="right hide-on-med-and-down">
 	        <li><Link className="black-text" to="/portfolio"><Icon>lightbulb_outline</Icon></Link></li>
 	        <li><Link className="black-text" to="/agenda"><Icon>volume_up</Icon></Link></li>

@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Modal, Icon, Input, Row} from 'react-materialize';
+import $ from 'jquery';
+import {observer} from 'mobx-react';
+import ideaStore from '../stores/IdeaStore';
+import Idea from './Idea';
 
 var laneStyle = {
 	paddingTop:'1em',
@@ -15,12 +19,22 @@ var laneStyle = {
 
 
 
-export default React.createClass({
+export default observer(React.createClass({
+  getIdeasForLane(){
+    return ideaStore.ideas;
+  },
+  submitIdea() {
+    var title = ReactDOM.findDOMNode(this.refs.newtitle).value.trim();
+    var description = ReactDOM.findDOMNode(this.refs.newdescription).value.trim();
+    var customer = $('#newcustomer')[0].value;
+    ideaStore.addIdea(title, description, customer);
+    
+  },
   render() {
   	let lanebutton;
   	if (this.props.title === 'ideate') {
   		lanebutton = (
-  			<Modal
+  			<Modal id='ideamodal'
     				header='submit an idea'
     				
     				trigger={
@@ -29,7 +43,7 @@ export default React.createClass({
     				actions={
     					<div>
     						<ul>
-    						<li><Button onClick={this.submitIdea} flat={true} waves='light'>ok</Button></li>
+    						<li><Button onClick={this.submitIdea} modal="close" flat={true} waves='light'>ok</Button></li>
     						<li><Button flat={true} modal="close" waves='light'>cancel</Button></li>
     						</ul>
       				</div>
@@ -38,25 +52,25 @@ export default React.createClass({
     				>      
       <Row>
         <div className="input-field col m12">
-          <input ref="newtitle" placeholder="Placeholder" type="text" className="validate" />
-          <label>First Name</label>
+          <input ref="newtitle" placeholder="" type="text" className="validate" />
+          <label>idea</label>
         </div>
       <div className="input-field col s12">
           <textarea ref="newdescription" className="materialize-textarea" ></textarea>
-          <label>Textarea</label>
+          <label>description</label>
         </div>
 
   	</Row>
     <Row>
-      <Input ref="newcustomer" s={12} type='select' label="customer">
-        <option value='1'>CIPL</option>
-        <option value='2'>ER OS</option>
-        <option value='3'>ER EADC/TTC</option>
-        <option value='4'>ER IO</option>
-        <option value='5'>ER Heart</option>
-        <option value='6'>ER Lung</option>
-        <option value='7'>ER Kidney</option>
-        <option value='8'>ER Acute Care</option>
+      <Input id="newcustomer" ref="newcustomer" s={12} type='select' label="customer">
+        <option value='cipl'>CIPL</option>
+        <option value='er_os'>ER OS</option>
+        <option value='er_adc'>ER ADC/TTC</option>
+        <option value='er_io'>ER IO</option>
+        <option value='er_heart'>ER Heart</option>
+        <option value='er_lung'>ER Lung</option>
+        <option value='er_kidney'>ER Kidney</option>
+        <option value='er_acute_care'>ER Acute Care</option>
       </Input>
     </Row>    
 
@@ -67,14 +81,22 @@ export default React.createClass({
   		lanebutton = '';
   	}
   	return(
-  	   	<div className="lane-header" style={laneStyle} >{this.props.title}
-  			{lanebutton}
-  		</div>
-  	)
-  },
-  submitIdea() {
-    console.log(ReactDOM.findDOMNode(this.refs.newtitle).value.trim());
-    console.log(ReactDOM.findDOMNode(this.refs.newdescription).value.trim());
+  	   	<div>
+          <div className="lane-header" style={laneStyle} >{this.props.title}
+  			   {lanebutton}
+  		    </div>
+          <div>
+                  <ul className="idea-list">
+        {this.getIdeasForLane().map(idea =>
+          (<Idea
+            key={idea.id}
+            idea={idea}
 
+          />)
+        )}
+      </ul>
+          </div>
+        </div>
+  	)
   }
-});
+}));

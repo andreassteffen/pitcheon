@@ -1,13 +1,15 @@
 import {observable} from 'mobx';
 
 export default class IdeaModel {
-	constructor(store, id, title, description, customer, status) {
+	constructor(store, id, title, description, customer, status, likes, pitch) {
 		this.store = store;
 		this.id = id;
-		this.title = observable({title});
-		this.description = observable({description});
-		this.customer = observable({customer});
-		this.status = observable({status});
+		this.title = observable(title);
+		this.description = observable(description);
+		this.customer = observable(customer);
+		this.status = observable(status);
+		this.likes = observable(likes);
+		this.pitch = observable(pitch);
 	}
 
 	destroy() {
@@ -28,17 +30,27 @@ export default class IdeaModel {
 	setStatus(status) {
 		this.status = status;
 	}
+	setPitch(pitch){
+		this.pitch = true;
+	}
+	addUserLike(user){
+		this.likes.push(user);
+	}
+	togglePitch(){
+		this.pitch.value = !this.pitch.value;
+	}
 	toJS() {
 		return {
 			id: this.id,
 			title: this.title,
 			description: this.description,
 			customer: this.customer,
-			status: this.status
+			status: this.status,
+			pitch: this.pitch
 		};
 	}
 
 	static fromJS(store, object) {
-		return new IdeaModel(store, object.id, object.title, object.description, object.customer, object.status);
+		return new IdeaModel(store, object.id, object.title, object.description, object.customer, object.status, object.likes, object.pitch);
 	}
 }

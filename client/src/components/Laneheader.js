@@ -22,9 +22,8 @@ var laneStyle = {
 export default observer(React.createClass({
   getIdeasForLane(){
     return ideaStore.ideas.filter(idea => {
-      console.log(idea);
-      console.log(idea.status.status === this.props.title);
-      return idea.status.status === this.props.title
+      console.log("Hi", idea.status.value);
+      return idea.status.value === this.props.title
     });
   },
   submitIdea() {

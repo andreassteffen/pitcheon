@@ -1,31 +1,71 @@
 import React from 'react';
 import {observer} from 'mobx-react';
+import classnames from 'classnames';
 
+var headerStyle = {
+	lineHeight: 1,
+ 	fontSize: "16px",
+ 	fontWeight: "bold"
+};
+var badgeStyle = {
+	marginTop: "-17px",
+	marginRight: "-12px"
+};
+
+var socialInfoStyle = {
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    cursor: "pointer"
+}
 
 export default observer(React.createClass({
-  render() {
-  	console.log(this.props.idea.title.title)
+  likeIdea: function() {
+  	console.log('crazy');
+  	this.props.idea.addUserLike('ggayq'); 
+  },
+
+  togglePitchIdea: function(){
+  	this.props.idea.togglePitch();
+  },
+  render: function() {
+  	let colorClass;
+
+  	switch (this.props.idea.status.value){
+  		case "ideate":
+  			colorClass = 'card pink darken-1';
+  			break;
+  		case "refine":
+  			colorClass = 'card blue lighten-1';
+  			break;
+  		case "act":
+  			colorClass = 'card green';
+  			break;
+  		default:
+  			colorClass = 'card white';
+  			break;
+  	}
+	let pitchClasses = classnames('material-icons tiny', {'yellow-text': this.props.idea.pitch.value,'white-text': !this.props.idea.pitch.value});
     return (
-		<div className="card pink darken-1">
+		<div className={colorClass}>
             <div className="card-content white-text">
-            	<span className="new badge" data-badge-caption="">{this.props.idea.customer.customer}</span>
-              <span className="card-title">{this.props.idea.title.title}</span>
-              <p>{this.props.idea.description.description}</p>
+            	<span className="new yellow lighten-1 black-text badge" style={badgeStyle} data-badge-caption="">{this.props.idea.customer.value}</span>
+              <span className="card-title" style={headerStyle}>{this.props.idea.title.value}</span>
+              <p>{this.props.idea.description.value}</p>
             </div>
             <div className="card-action">
-              <span className="socialinfo like"><span className="white-text">0</span><i className="material-icons white-text tiny">thumb_up</i></span>
-              <span className="socialinfo comment"><a href="#modal-add-comment" className="modal-trigger-add-comment"><span className="white-text">0</span><i className="material-icons white-text tiny">forum</i></a></span>
-              <span className="socialinfo"><a className="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Andreas Steffen<br>Daniel Freitag" data-tooltip-id="23d95f01-44d6-d9f7-b094-266f310966d2"><span className="white-text">1</span><i className="material-icons white-text tiny">face</i></a></span>
+              <span style={socialInfoStyle}><span className="white-text">{this.props.idea.likes.length}</span><i onClick={this.likeIdea} className="material-icons white-text tiny">thumb_up</i></span>
+              <span style={socialInfoStyle}><span className="white-text">0</span><i className="material-icons white-text tiny">forum</i></span>
+              <span style={socialInfoStyle}><span className="white-text">0</span><i className="material-icons white-text tiny">face</i></span>
               <div className="right">
-                <span className="socialinfo pitch"><i className="material-icons white-text tiny">volume_up</i></span>
-                <span className="editidea"><i className="material-icons white-text tiny">mode_edit</i></span>
+                <span style={socialInfoStyle}><i onClick={this.togglePitchIdea} className={pitchClasses} >volume_up</i></span>
+                <span style={socialInfoStyle}><i className="material-icons white-text tiny">mode_edit</i></span>
               </div>
             </div>
           </div>
 
-  )
+  	)
   },
   propTypes: {
-	idea: React.PropTypes.object.isRequired,
+		idea: React.PropTypes.object.isRequired,
 	}
 }));

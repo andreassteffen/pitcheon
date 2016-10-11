@@ -31,13 +31,14 @@ export default class IdeaModel {
 		this.status = status;
 	}
 	setPitch(pitch){
-		this.pitch = true;
+		this.pitch.set(pitch);
 	}
 	addUserLike(user){
 		this.likes.push(user);
 	}
 	togglePitch(){
-		this.pitch.value = !this.pitch.value;
+		this.pitch.set(!this.pitch.get());
+		console.log('I really change the pitch!!!', this.pitch.value)
 	}
 	toJS() {
 		return {

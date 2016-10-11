@@ -22,7 +22,8 @@ const PitcheonNavbar = () => (
 	        <li><Link className="black-text" to="/agenda"><Icon>volume_up</Icon></Link></li>
 	        <li><Link className="black-text" to="/archive"><Icon>archive</Icon></Link></li>
 	        <li><Link className="black-text" to="/notification"><Icon>notifications_active</Icon></Link></li>
-	      <li><Link className="black-text" to="/notification"><Icon>assessment</Icon></Link></li>
+	      	<li><Link className="black-text" to="/notification"><Icon>assessment</Icon></Link></li>
+	      	<li><Link className="black-text" to="/login"><Icon>perm_identity</Icon></Link></li>
 	      </ul>
 	    </div>
 	  </nav> 

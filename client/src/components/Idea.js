@@ -9,7 +9,7 @@ var headerStyle = {
 };
 var badgeStyle = {
 	marginTop: "-17px",
-	marginRight: "-12px"
+	marginRight: "-17px"
 };
 
 var socialInfoStyle = {
@@ -26,6 +26,7 @@ export default observer(React.createClass({
 
   togglePitchIdea: function(){
   	this.props.idea.togglePitch();
+  	this.forceUpdate()
   },
   render: function() {
   	let colorClass;
@@ -48,7 +49,7 @@ export default observer(React.createClass({
     return (
 		<div className={colorClass}>
             <div className="card-content white-text">
-            	<span className="new yellow lighten-1 black-text badge" style={badgeStyle} data-badge-caption="">{this.props.idea.customer.value}</span>
+              <div className="chip right" style = {badgeStyle}>{this.props.idea.customer.value}</div>
               <span className="card-title" style={headerStyle}>{this.props.idea.title.value}</span>
               <p>{this.props.idea.description.value}</p>
             </div>
@@ -57,7 +58,7 @@ export default observer(React.createClass({
               <span style={socialInfoStyle}><span className="white-text">0</span><i className="material-icons white-text tiny">forum</i></span>
               <span style={socialInfoStyle}><span className="white-text">0</span><i className="material-icons white-text tiny">face</i></span>
               <div className="right">
-                <span style={socialInfoStyle}><i onClick={this.togglePitchIdea} className={pitchClasses} >volume_up</i></span>
+                <span style={socialInfoStyle}><i onClick={this.togglePitchIdea} className={pitchClasses} >volume_up</i>{this.props.idea.pitch.get}</span>
                 <span style={socialInfoStyle}><i className="material-icons white-text tiny">mode_edit</i></span>
               </div>
             </div>

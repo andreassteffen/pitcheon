@@ -6,8 +6,8 @@ import IdeaModel from '../models/IdeaModel';
 class IdeaStore{
 	ideas = observable([]);
 	
-	addIdea (title, description, customer, status) {
-		this.ideas.push(new IdeaModel(this, Utils.uuid(), title, description, customer, status));
+	addIdea (title, description, customer, status,likes=[], pitch=false) {
+		this.ideas.push(new IdeaModel(this, Utils.uuid(), title, description, customer, status,likes,pitch));
 	}
 	
 	static fromJS(array) {

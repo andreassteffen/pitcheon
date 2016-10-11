@@ -22,8 +22,7 @@ var laneStyle = {
 export default observer(React.createClass({
   getIdeasForLane(){
     return ideaStore.ideas.filter(idea => {
-      console.log("Hi", idea.status.value);
-      return idea.status.value === this.props.title
+      return idea.status.get() === this.props.title
     });
   },
   submitIdea() {
@@ -31,8 +30,12 @@ export default observer(React.createClass({
     var description = ReactDOM.findDOMNode(this.refs.newdescription).value.trim();
     var customer = $('#newcustomer')[0].value;
     var status = 'ideate';
-    ideaStore.addIdea(title, description, customer,status);
-    
+    ideaStore.addIdea(title, description, customer,status,);
+
+    var title = ReactDOM.findDOMNode(this.refs.newtitle).value = '';
+    var description = ReactDOM.findDOMNode(this.refs.newdescription).value = '';
+    var customer = $('#newcustomer')[0].value = 'cipl';
+    this.forceUpdate();
   },
   render() {
   	let lanebutton;
@@ -68,13 +71,14 @@ export default observer(React.createClass({
     <Row>
       <Input id="newcustomer" ref="newcustomer" s={12} type='select' label="customer">
         <option value='cipl'>CIPL</option>
-        <option value='er_os'>ER OS</option>
-        <option value='er_adc'>ER ADC/TTC</option>
-        <option value='er_io'>ER IO</option>
-        <option value='er_heart'>ER Heart</option>
-        <option value='er_lung'>ER Lung</option>
-        <option value='er_kidney'>ER Kidney</option>
-        <option value='er_acute_care'>ER Acute Care</option>
+        <option value='os'>ER OS</option>
+        <option value='adc'>ER ADC/TTC</option>
+        <option value='io'>ER IO</option>
+        <option value='heart'>ER Heart</option>
+        <option value='lung'>ER Lung</option>
+        <option value='kidney'>ER Kidney</option>
+        <option value='ac'>ER Acute Care</option>
+        <option value='gt'>ER GT</option>
       </Input>
     </Row>    
 
